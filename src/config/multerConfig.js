@@ -23,9 +23,8 @@ module.exports.upload = multer({
 	},
 	fileFilter: function (req, file, cb) {
 		const fileTypes = /csv/;
-		const mimeType = fileTypes.test(file.mimetype);
+		const mimeType = file.mimetype === 'application/vnd.ms-excel';
 		const extname = fileTypes.test(path.extname(file.originalname));
-
 		if (mimeType && extname) {
 			return cb(null, true);
 		}

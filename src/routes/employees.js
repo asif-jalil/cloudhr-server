@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/view', getEmployees);
-router.post('/create', upload.single('file'), createEmployee);
+router.post('/create', upload.single('file'), logRequest, createEmployee);
 
 
 module.exports = router;
