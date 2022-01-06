@@ -12,11 +12,17 @@ module.exports = (sequelize, datatype) => {
 			},
 			email: {
 				type: datatype.STRING,
-				allowNull: false
+				allowNull: false,
+				unique: true
 			}
 		},
 		{
-			tableName: 'employees'
+			tableName: 'employees',
+			indexes: [
+				{
+					fields: ['firstName', 'lastName']
+				}
+			]
 		}
 	);
 

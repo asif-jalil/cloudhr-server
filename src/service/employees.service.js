@@ -1,12 +1,12 @@
-const db = require("../db/db");
+const db = require('../db/db');
 
 // create main model
 const Employee = db.employee;
 
 module.exports.createEmployee = async function (employee) {
-  return await Employee.create(employee);
+	return await Employee.create(employee);
 };
 
-module.exports.getEmployees = async function () {
-  return await Employee.findAll({});
+module.exports.countEmployees = async function () {
+	return await Employee.count({ col: 'Employee.id' });
 };
