@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
 		const dir = req.originalUrl.split('/')[1];
 		const imageType = /jpg|jpeg|png/;
 		const isImage = imageType.test(req.mimeType);
-		const filePath = `src/assets/${isImage ? 'images' : 'files'}/${dir}`;
+		const filePath = `src/assets/${isImage ? 'images' : 'files'}/${dir}/`;
 		fs.mkdirSync(filePath, { recursive: true });
 		cb(null, filePath);
 	},
