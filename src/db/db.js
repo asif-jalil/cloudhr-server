@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Op } = require('sequelize');
 const dbConfig = require('../config/dbConfig');
 const path = require('path');
 const fs = require('fs');
@@ -30,16 +30,16 @@ const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
 	}
 })();
 
-db.Sequelize = Sequelize
-db.sequelize = sequelize
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+db.Op = Op;
 
 const src = __dirname.replace(/\\/g, '/').split('/src')[0].concat('/src');
 const models = fs.readdirSync(path.join(src, 'models'));
 models.forEach(file => {
 	const modelName = file.split('.model.js')[0];
 	db[modelName] = require(`../models/${file.split('.js')[0]}`)(sequelize, DataTypes);
-})
-
+});
 
 Object.keys(db).forEach(key => {
 	if (db[key].associate) {
