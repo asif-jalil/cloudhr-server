@@ -23,6 +23,7 @@ module.exports.getEmployees = async function (offset, limit) {
 
 module.exports.searchEmployees = async function (searchTerm) {
 	return await Employee.findAll({
+		attributes: { exclude: ['createdAt', 'updatedAt'] },
 		where: {
 			[Op.or]: [{ firstName: { [Op.like]: '%' + searchTerm + '%' } }, { lastName: { [Op.like]: '%' + searchTerm + '%' } }]
 		}

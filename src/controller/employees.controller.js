@@ -1,12 +1,23 @@
 const employeeService = require('../service/employees.service');
+const { validationResult } = require('express-validator');
 const fs = require('fs');
 
 module.exports.createEmployee = async function (req, res, next) {
 	const employee = req.body;
 
 	try {
-		await employeeService.createSingleEmployee(employee);
-		return res.status(200).json({ status: 200, message: 'Employee Added Successfully' });
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			let errorMessage = ""
+			errors.errors.forEach(error => {
+				errorMessage = errorMessage + error.msg + ', '
+			})
+			next({ status: 400, message: errorMessage })
+		} else {
+			await employeeService.createSingleEmployee(employee);
+			return res.status(200).json({ status: 200, message: 'Employee Added Successfully' });
+		}
+		
 	} catch (error) {
 		next({ status: 500, message: error.errors[0].message });
 	}
