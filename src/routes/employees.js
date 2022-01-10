@@ -11,10 +11,19 @@ router.get("/", function (req, res) {
   return res.json({ message: "App is running" });
 });
 
+// Count total employee route
 router.get("/count", countEmployees);
+
+//  Create an employee route
 router.post("/create", validateSingleEmployee, createEmployee);
+
+// Bulk employee upload by CSV route
 router.post("/createbulk", upload.single("file"), parseCSV, validateBulkEmployee, createBulkEmployee);
+
+// Get total employee route
 router.get("/view", getEmployees);
+
+// Search employee route
 router.get("/search", searchEmployees);
 
 module.exports = router;

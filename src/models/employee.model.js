@@ -1,4 +1,5 @@
 module.exports = (sequelize, datatype) => {
+  // Defining sequelize model here
 	const Employee = sequelize.define(
 		'employee',
 		{

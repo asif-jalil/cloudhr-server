@@ -2,6 +2,7 @@ const employeeService = require("../service/employees.service");
 const { validationResult } = require("express-validator");
 const fs = require("fs");
 
+// Create an employee handler
 module.exports.createEmployee = async function (req, res, next) {
   const employee = req.body;
 
@@ -22,6 +23,8 @@ module.exports.createEmployee = async function (req, res, next) {
   }
 };
 
+
+// Create bulk employee uploaded by CSV handler
 module.exports.createBulkEmployee = async function (req, res, next) {
   const csvData = req.body;
 
@@ -43,11 +46,15 @@ module.exports.createBulkEmployee = async function (req, res, next) {
   }
 };
 
+
+// Count total employee handler
 module.exports.countEmployees = async function (req, res) {
   const employees = await employeeService.countEmployees();
   return res.setHeader('Last-Modified', (new Date()).toUTCString()).status(200).json(employees);
 };
 
+
+// Get total employee handler
 module.exports.getEmployees = async function (req, res) {
   const pageNumber = req.query.page || 1;
   const perPage = req.query.posts || 5;
@@ -63,6 +70,8 @@ module.exports.getEmployees = async function (req, res) {
   }
 };
 
+
+// Search employee handler
 module.exports.searchEmployees = async function (req, res, next) {
   const { searchTerm } = req.query;
 
