@@ -20,7 +20,7 @@ module.exports.createBulkEmployee = async function (rows) {
 
 // Count total employee query
 module.exports.countEmployees = async function () {
-	return await Employee.count({ col: 'Employee.id' });
+	return await Employee.count();
 };
 
 
