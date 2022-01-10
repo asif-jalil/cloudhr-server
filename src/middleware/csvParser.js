@@ -19,7 +19,15 @@ module.exports.parseCSV = function (req, res, next) {
 			results.push(data);
 		})
 		.on('end', () => {
-			req.csvData = results;
+			const filteredCSV = results.filter(row => {
+				const values = Object.values(row);
+				const isValid = values.every(value => !!value);
+				if (isValid) {
+					return row;
+				}
+			});
+			req.body = filteredCSV;
+			console.log(filteredCSV);
 			next();
 		});
 };
