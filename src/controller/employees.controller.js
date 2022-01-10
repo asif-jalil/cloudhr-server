@@ -49,8 +49,12 @@ module.exports.createBulkEmployee = async function (req, res, next) {
 
 // Count total employee handler
 module.exports.countEmployees = async function (req, res) {
-  const employees = await employeeService.countEmployees();
+  try {
+    const employees = await employeeService.countEmployees();
   return res.setHeader('Last-Modified', (new Date()).toUTCString()).status(200).json(employees);
+  } catch (error) {
+    next({status: 500, message: "Something occurred to count users. Try again" });
+  }
 };
 
 
