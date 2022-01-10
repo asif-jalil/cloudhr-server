@@ -27,7 +27,6 @@ module.exports.parseCSV = function (req, res, next) {
 				}
 			});
 			req.body = filteredCSV;
-			console.log(filteredCSV);
 			next();
 		});
 };
