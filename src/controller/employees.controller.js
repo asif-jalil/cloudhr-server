@@ -8,18 +8,17 @@ module.exports.createEmployee = async function (req, res, next) {
 	try {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			let errorMessage = ""
+			let errorMessage = '';
 			errors.errors.forEach(error => {
-				errorMessage = errorMessage + error.msg + ', '
-			})
-			next({ status: 400, message: errorMessage })
+				errorMessage = errorMessage + error.msg + ', ';
+			});
+			next({ status: 400, message: errorMessage });
 		} else {
 			await employeeService.createSingleEmployee(employee);
 			return res.status(200).json({ status: 200, message: 'Employee Added Successfully' });
 		}
-		
 	} catch (error) {
-		next({ status: 500, message: error.errors[0].message });
+		next({ status: 500, message: error.errors[0].message || 'Something happened wrong. Please try again with proper information.' });
 	}
 };
 
@@ -37,9 +36,8 @@ module.exports.createBulkEmployee = async function (req, res, next) {
 		await employeeService.createBulkEmployee(filteredCSV);
 		return res.status(200).json({ status: 200, message: 'Bulk Employee Added Successfully' });
 	} catch (error) {
-		console.log(error);
 		fs.unlinkSync(`${req.file.destination}${req.file.filename}`);
-		next({ status: 500, message: 'Something error happened. Try again with proper file' });
+		next({ status: 500, message: error.errors ? error.errors[0].message : 'Something happened wrong. Please try again with proper information.' });
 	}
 };
 
