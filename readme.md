@@ -1,5 +1,5 @@
 # Cloud HR API
-This is node js api for blog where user can register and login. And simple post management system.
+This is a HR management system. An HR can create employee, see all employee and search employee
 
 The entire application is contained within the `src/app.js` file.
 You will find all configuration in `src/config/` folder
