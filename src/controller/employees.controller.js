@@ -48,7 +48,7 @@ module.exports.createBulkEmployee = async function (req, res, next) {
 
 
 // Count total employee handler
-module.exports.countEmployees = async function (req, res) {
+module.exports.countEmployees = async function (req, res, next) {
   try {
     const employees = await employeeService.countEmployees();
   return res.setHeader('Last-Modified', (new Date()).toUTCString()).status(200).json(employees);
@@ -59,7 +59,7 @@ module.exports.countEmployees = async function (req, res) {
 
 
 // Get total employee handler
-module.exports.getEmployees = async function (req, res) {
+module.exports.getEmployees = async function (req, res, next) {
   const pageNumber = req.query.page || 1;
   const perPage = req.query.posts || 5;
 
