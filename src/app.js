@@ -7,7 +7,7 @@ const employeesRouter = require("./routes/employees");
 const app = express();
 
 db.sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log("Re sync done!");
   })

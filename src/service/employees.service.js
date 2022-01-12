@@ -26,7 +26,7 @@ module.exports.countEmployees = async function () {
 
 // Get total employee query
 module.exports.getEmployees = async function (offset, limit) {
-	return await Employee.findAll({ offset: offset, limit: limit });
+	return await Employee.findAll({ order: [['id', 'DESC']], offset: offset, limit: limit });
 };
 
 
